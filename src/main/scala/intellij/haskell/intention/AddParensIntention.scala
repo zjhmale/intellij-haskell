@@ -19,7 +19,15 @@ class AddParensIntention extends PsiElementBaseIntentionAction {
         end.getParent.addAfter(right, end)
       }
 
-      if (psiElement.getText.length == 1 && start.isInstanceOf[PsiWhiteSpace]) {
+      if (editor.getSelectionModel.getSelectionStart == editor.getSelectionModel.getSelectionEnd) {
+        if (start.getText == ".") {
+          addParens(end, end)
+        } else if (end.getText == ".") {
+          addParens(start, start)
+        } else {
+          addParens(start, end)
+        }
+      } else if (psiElement.getText.length == 1 && start.isInstanceOf[PsiWhiteSpace]) {
         addParens(end, end)
       } else if (psiElement.getText.length == 1 && end.isInstanceOf[PsiWhiteSpace]) {
         addParens(start, start)
