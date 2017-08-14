@@ -14,15 +14,9 @@ public interface HaskellExport extends HaskellCompositeElement {
   HaskellDotDotParens getDotDotParens();
 
   @Nullable
-  HaskellModId getModId();
+  HaskellModid getModid();
 
   @Nullable
-  HaskellQcon getQcon();
-
-  @Nullable
-  HaskellQvar getQvar();
-
-  @Nullable
-  HaskellQvarOp getQvarOp();
+  HaskellQCon getQCon();
 
 }

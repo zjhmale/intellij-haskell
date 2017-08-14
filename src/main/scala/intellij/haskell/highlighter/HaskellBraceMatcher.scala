@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rik van der Kleij
+ * Copyright 2016 Rik van der Kleij
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ object HaskellBraceMatcher {
     new BracePair(HaskellTypes.HS_LEFT_PAREN, HaskellTypes.HS_RIGHT_PAREN, false),
     new BracePair(HaskellTypes.HS_PRAGMA_START, HaskellTypes.HS_PRAGMA_END, true),
     new BracePair(HaskellTypes.HS_LEFT_BRACE, HaskellTypes.HS_RIGHT_BRACE, true),
-    new BracePair(HaskellTypes.HS_NCOMMENT_START, HaskellTypes.HS_NCOMMENT_END, true),
     new BracePair(HaskellTypes.HS_BACKQUOTE, HaskellTypes.HS_BACKQUOTE, false),
+    new BracePair(HaskellTypes.HS_NCOMMENT_START, HaskellTypes.HS_NCOMMENT_END, true),
     new BracePair(HaskellTypes.HS_LEFT_BRACKET, HaskellTypes.HS_RIGHT_BRACKET, false))
 }
 

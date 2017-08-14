@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface HaskellLanguagePragma extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellQcon> getQconList();
+  List<HaskellQName> getQNameList();
 
 }

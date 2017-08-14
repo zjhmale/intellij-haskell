@@ -11,7 +11,7 @@ public interface HaskellConstr1 extends HaskellCompositeElement {
   List<HaskellFielddecl> getFielddeclList();
 
   @NotNull
-  HaskellQcon getQcon();
+  HaskellQName getQName();
 
   @NotNull
   List<HaskellUnpackNounpackPragma> getUnpackNounpackPragmaList();

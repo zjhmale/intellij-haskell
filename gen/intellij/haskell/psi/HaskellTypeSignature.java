@@ -5,29 +5,26 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellTypeSignature extends HaskellDeclarationElement {
 
-  @Nullable
-  HaskellContext getContext();
-
-  @Nullable
-  HaskellScontext getScontext();
+  @NotNull
+  List<HaskellCcontext> getCcontextList();
 
   @NotNull
-  List<HaskellTtype> getTtypeList();
-
-  @Nullable
-  HaskellVarId getVarId();
+  List<HaskellQNames> getQNamesList();
 
   @NotNull
-  HaskellVars getVars();
+  HaskellTtype getTtype();
 
   String getName();
 
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellTypeFamilyDeclarationImpl extends HaskellCompositeElementImpl implements HaskellTypeFamilyDeclaration {
@@ -30,13 +31,13 @@ public class HaskellTypeFamilyDeclarationImpl extends HaskellCompositeElementImp
   @Override
   @Nullable
   public HaskellExpression getExpression() {
-    return findChildByClass(HaskellExpression.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellExpression.class);
   }
 
   @Override
   @NotNull
   public HaskellTypeFamilyType getTypeFamilyType() {
-    return findNotNullChildByClass(HaskellTypeFamilyType.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellTypeFamilyType.class));
   }
 
   public String getName() {
@@ -49,6 +50,10 @@ public class HaskellTypeFamilyDeclarationImpl extends HaskellCompositeElementImp
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

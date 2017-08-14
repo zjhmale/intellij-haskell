@@ -7,28 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellSimpleclass extends HaskellCompositeElement {
 
+  @NotNull
+  List<HaskellQName> getQNameList();
+
   @Nullable
-  HaskellGtycon getGtycon();
-
-  @NotNull
-  List<HaskellQcon> getQconList();
-
-  @NotNull
-  List<HaskellQconOp> getQconOpList();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @NotNull
-  List<HaskellSimpleclassTildePart> getSimpleclassTildePartList();
-
-  @NotNull
-  List<HaskellTtype> getTtypeList();
-
-  @NotNull
-  List<HaskellTypeSignature> getTypeSignatureList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
+  HaskellTtype getTtype();
 
 }

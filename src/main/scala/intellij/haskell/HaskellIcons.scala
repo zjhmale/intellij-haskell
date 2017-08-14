@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rik van der Kleij
+ * Copyright 2016 Rik van der Kleij
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ package intellij.haskell
 import com.intellij.openapi.util.IconLoader
 
 object HaskellIcons {
-  final val HaskellSmallLogo = IconLoader.getIcon("/icons/haskell-small-logo.png")
-  final val HaskellSmallBlueLogo = IconLoader.getIcon("/icons/haskell-small-blue-logo.png")
-  final val HaskellLogo = IconLoader.getIcon("/icons/haskell_24x24.png")
+  final val HaskellSmallLogo = IconLoader.getIcon("/icons/haskell@16.png")
+  final val HaskellSmallBlueLogo = IconLoader.getIcon("/icons/haskell-blue@16.png")
+  final val HaskellLogo = IconLoader.getIcon("/icons/haskell@24.png")
 
   final val Module = IconLoader.getIcon("/icons/module.png")
   final val Data = IconLoader.getIcon("/icons/data.png")
@@ -34,4 +34,6 @@ object HaskellIcons {
   final val TypeSignature = IconLoader.getIcon("/icons/type_signature.png")
   final val Instance = IconLoader.getIcon("/icons/instance.png")
   final val Foreign = IconLoader.getIcon("/icons/foreign.png")
+
+  final val CabalLogo = IconLoader.getIcon("/icons/cabal.png")
 }

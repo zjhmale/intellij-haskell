@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rik van der Kleij
+ * Copyright 2016 Rik van der Kleij
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import javax.swing._
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.{FileType, FileTypeConsumer, FileTypeFactory, LanguageFileType}
 import com.intellij.psi.FileViewProvider
+import intellij.haskell.psi.{HaskellModid, HaskellModuleDeclaration, HaskellPsiUtil}
 import org.jetbrains.annotations.NotNull
 
 class HaskellFile(viewProvider: FileViewProvider) extends PsiFileBase(viewProvider, HaskellLanguage.Instance) {
@@ -62,32 +63,8 @@ class HaskellFileType extends LanguageFileType(HaskellLanguage.Instance) {
   }
 }
 
-object LiterateHaskellFileType {
-  final val INSTANCE: LiterateHaskellFileType = new LiterateHaskellFileType
-}
-
-class LiterateHaskellFileType extends LanguageFileType(HaskellLanguage.Instance) {
-
-  def getName: String = {
-    "Literate Haskell file"
-  }
-
-  def getDescription: String = {
-    "Literate Haskell language file"
-  }
-
-  def getDefaultExtension: String = {
-    "lhs"
-  }
-
-  def getIcon: Icon = {
-    HaskellIcons.HaskellSmallLogo
-  }
-}
-
 class HaskellLanguageFileTypeFactory extends FileTypeFactory {
   def createFileTypes(consumer: FileTypeConsumer) {
     consumer.consume(HaskellFileType.INSTANCE, HaskellFileType.INSTANCE.getDefaultExtension)
-    consumer.consume(LiterateHaskellFileType.INSTANCE, LiterateHaskellFileType.INSTANCE.getDefaultExtension)
   }
 }

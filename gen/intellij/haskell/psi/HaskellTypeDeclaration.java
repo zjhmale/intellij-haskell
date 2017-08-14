@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellTypeDeclaration extends HaskellDeclarationElement {
@@ -12,8 +13,8 @@ public interface HaskellTypeDeclaration extends HaskellDeclarationElement {
   @Nullable
   HaskellExpression getExpression();
 
-  @Nullable
-  HaskellKindSignature getKindSignature();
+  @NotNull
+  List<HaskellKindSignature> getKindSignatureList();
 
   @NotNull
   HaskellSimpletype getSimpletype();
@@ -29,5 +30,7 @@ public interface HaskellTypeDeclaration extends HaskellDeclarationElement {
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

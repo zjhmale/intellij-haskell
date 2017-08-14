@@ -27,14 +27,14 @@ public class HaskellKindSignatureImpl extends HaskellCompositeElementImpl implem
 
   @Override
   @NotNull
-  public HaskellTtype getTtype() {
-    return findNotNullChildByClass(HaskellTtype.class);
+  public HaskellQName getQName() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQName.class));
   }
 
   @Override
   @NotNull
-  public HaskellVarId getVarId() {
-    return findNotNullChildByClass(HaskellVarId.class);
+  public HaskellTtype getTtype() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellTtype.class));
   }
 
 }

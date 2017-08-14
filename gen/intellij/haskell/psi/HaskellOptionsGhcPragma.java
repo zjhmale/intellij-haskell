@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface HaskellOptionsGhcPragma extends HaskellCompositeElement {
 
   @NotNull
-  HaskellGeneralPragmaContent getGeneralPragmaContent();
+  List<HaskellOptionsGhcOption> getOptionsGhcOptionList();
 
 }

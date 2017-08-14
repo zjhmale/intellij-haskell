@@ -8,13 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface HaskellConstr4 extends HaskellCompositeElement {
 
   @NotNull
-  HaskellGconSym getGconSym();
-
-  @NotNull
-  HaskellQcon getQcon();
-
-  @NotNull
-  HaskellQvar getQvar();
+  List<HaskellQName> getQNameList();
 
   @NotNull
   List<HaskellUnpackNounpackPragma> getUnpackNounpackPragmaList();

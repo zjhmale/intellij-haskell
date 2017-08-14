@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellDerivingDeclarationImpl extends HaskellCompositeElementImpl implements HaskellDerivingDeclaration {
@@ -30,19 +31,19 @@ public class HaskellDerivingDeclarationImpl extends HaskellCompositeElementImpl 
   @Override
   @NotNull
   public HaskellInst getInst() {
-    return findNotNullChildByClass(HaskellInst.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellInst.class));
   }
 
   @Override
   @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
+  public HaskellQName getQName() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQName.class));
   }
 
   @Override
   @Nullable
   public HaskellScontext getScontext() {
-    return findChildByClass(HaskellScontext.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellScontext.class);
   }
 
   public String getName() {
@@ -55,6 +56,10 @@ public class HaskellDerivingDeclarationImpl extends HaskellCompositeElementImpl 
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

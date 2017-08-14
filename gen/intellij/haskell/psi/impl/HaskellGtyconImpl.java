@@ -27,8 +27,8 @@ public class HaskellGtyconImpl extends HaskellCompositeElementImpl implements Ha
 
   @Override
   @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
+  public HaskellQName getQName() {
+    return PsiTreeUtil.getChildOfType(this, HaskellQName.class);
   }
 
 }

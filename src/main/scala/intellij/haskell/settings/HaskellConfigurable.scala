@@ -23,17 +23,15 @@ import javax.swing.event.DocumentEvent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.options.{Configurable, ConfigurationException}
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
+import com.intellij.openapi.util.SystemInfo
 import com.intellij.ui.DocumentAdapter
-import intellij.haskell.external.GhcModProcessManager
 
 import scala.language.{existentials, reflectiveCalls}
 
 class HaskellConfigurable extends Configurable {
   private var isModifiedByUser = false
-  private val ghcModPathField = new TextFieldWithBrowseButton
-  private val haskellDocsPathField = new TextFieldWithBrowseButton
-  private val hlintPathField = new TextFieldWithBrowseButton
-  private val stackPathField = new TextFieldWithBrowseButton
+  private val hindentPathField = new TextFieldWithBrowseButton
+  private val stylishHaskellPathField = new TextFieldWithBrowseButton
 
   override def getDisplayName: String = {
     "Haskell"
@@ -45,26 +43,14 @@ class HaskellConfigurable extends Configurable {
 
   override def createComponent: JComponent = {
 
-    ghcModPathField.addBrowseFolderListener(
-      s"Select $GhcMod",
+    hindentPathField.addBrowseFolderListener(
+      s"Select $Hindent",
       null,
       null,
       FileChooserDescriptorFactory.createSingleLocalFileDescriptor())
 
-    haskellDocsPathField.addBrowseFolderListener(
-      s"Select $HaskellDocs",
-      null,
-      null,
-      FileChooserDescriptorFactory.createSingleLocalFileDescriptor())
-
-    hlintPathField.addBrowseFolderListener(
-      s"Select $Hlint",
-      null,
-      null,
-      FileChooserDescriptorFactory.createSingleLocalFileDescriptor())
-
-    stackPathField.addBrowseFolderListener(
-      s"Select $Stack",
+    stylishHaskellPathField.addBrowseFolderListener(
+      s"Select $StylishHaskell",
       null,
       null,
       FileChooserDescriptorFactory.createSingleLocalFileDescriptor())
@@ -77,10 +63,8 @@ class HaskellConfigurable extends Configurable {
       }
     }
 
-    ghcModPathField.getTextField.getDocument.addDocumentListener(listener)
-    haskellDocsPathField.getTextField.getDocument.addDocumentListener(listener)
-    hlintPathField.getTextField.getDocument.addDocumentListener(listener)
-    stackPathField.getTextField.getDocument.addDocumentListener(listener)
+    hindentPathField.getTextField.getDocument.addDocumentListener(listener)
+    stylishHaskellPathField.getTextField.getDocument.addDocumentListener(listener)
 
     val base = new GridBagConstraints {
       insets = new Insets(2, 0, 2, 3)
@@ -117,10 +101,8 @@ class HaskellConfigurable extends Configurable {
       ))
     }
 
-    addLabeledControl(0, GhcMod, ghcModPathField)
-    addLabeledControl(1, HaskellDocs, haskellDocsPathField)
-    addLabeledControl(3, Hlint, hlintPathField)
-    addLabeledControl(4, Stack, stackPathField)
+    addLabeledControl(1, Hindent, hindentPathField)
+    addLabeledControl(3, StylishHaskell, stylishHaskellPathField)
 
     settingsPanel.add(new JPanel(), base.setConstraints(
       gridx = 0,
@@ -134,27 +116,19 @@ class HaskellConfigurable extends Configurable {
   override def apply() {
     validatePaths()
 
-    val state = HaskellSettings.getInstance().getState
-    state.ghcModPath = ghcModPathField.getText
-    state.haskellDocsPath = haskellDocsPathField.getText
-    state.hlintPath = hlintPathField.getText
-    state.stackPath = stackPathField.getText
-
-    GhcModProcessManager.setInRestartState()
-
-    isModifiedByUser = false
+    val state = HaskellSettingsPersistentStateComponent.getInstance().getState
+    state.hindentPath = hindentPathField.getText
+    state.stylishHaskellPath = stylishHaskellPathField.getText
   }
 
   private def validatePaths() {
     def validate(command: String, path: String) = {
-      if (!path.endsWith(command) && !path.trim.isEmpty) {
+      val suffix = if (SystemInfo.isWindows) command + ".exe" else command
+      if (!path.endsWith(suffix) && !path.trim.isEmpty) {
         throw new ConfigurationException(s"Invalid path to $command")
       }
     }
-    Seq((GhcMod, ghcModPathField.getText),
-      (HaskellDocs, haskellDocsPathField.getText),
-      (Hlint, hlintPathField.getText),
-      (Stack, stackPathField.getText)
+    Seq((Hindent, hindentPathField.getText), (StylishHaskell, stylishHaskellPathField.getText)
     ).foreach({ case (c, p) => validate(c, p) })
   }
 
@@ -164,19 +138,13 @@ class HaskellConfigurable extends Configurable {
   override def getHelpTopic: String = ""
 
   override def reset() {
-    val state = HaskellSettings.getInstance().getState
-    ghcModPathField.getTextField.setText(state.ghcModPath)
-    haskellDocsPathField.getTextField.setText(state.haskellDocsPath)
-    hlintPathField.getTextField.setText(state.hlintPath)
-    stackPathField.getTextField.setText(state.stackPath)
-
-    isModifiedByUser = false
+    val state = HaskellSettingsPersistentStateComponent.getInstance().getState
+    hindentPathField.getTextField.setText(state.hindentPath)
+    stylishHaskellPathField.getTextField.setText(state.stylishHaskellPath)
   }
 }
 
 object HaskellConfigurable {
-  val GhcMod = "ghc-mod"
-  val HaskellDocs = "haskell-docs"
-  val Hlint = "hlint"
-  val Stack = "stack"
+  final val Hindent = "hindent"
+  final val StylishHaskell = "stylish-haskell"
 }

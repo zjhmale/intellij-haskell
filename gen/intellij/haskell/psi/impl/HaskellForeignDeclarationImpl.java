@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellForeignDeclarationImpl extends HaskellCompositeElementImpl implements HaskellForeignDeclaration {
@@ -30,7 +31,7 @@ public class HaskellForeignDeclarationImpl extends HaskellCompositeElementImpl i
   @Override
   @NotNull
   public HaskellExpression getExpression() {
-    return findNotNullChildByClass(HaskellExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellExpression.class));
   }
 
   public String getName() {
@@ -45,7 +46,7 @@ public class HaskellForeignDeclarationImpl extends HaskellCompositeElementImpl i
     return HaskellPsiImplUtil.getIdentifierElements(this);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

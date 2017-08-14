@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellTypeInstanceDeclarationImpl extends HaskellCompositeElementImpl implements HaskellTypeInstanceDeclaration {
@@ -30,7 +31,7 @@ public class HaskellTypeInstanceDeclarationImpl extends HaskellCompositeElementI
   @Override
   @NotNull
   public HaskellExpression getExpression() {
-    return findNotNullChildByClass(HaskellExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellExpression.class));
   }
 
   public String getName() {
@@ -43,6 +44,10 @@ public class HaskellTypeInstanceDeclarationImpl extends HaskellCompositeElementI
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

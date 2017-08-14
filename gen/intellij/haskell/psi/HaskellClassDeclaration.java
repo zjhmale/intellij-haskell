@@ -5,24 +5,16 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellClassDeclaration extends HaskellDeclarationElement {
 
-  @NotNull
-  List<HaskellCdecl> getCdeclList();
-
   @Nullable
-  HaskellContext getContext();
+  HaskellCidecls getCidecls();
 
   @NotNull
-  List<HaskellExpression> getExpressionList();
-
-  @NotNull
-  HaskellQcon getQcon();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
+  List<HaskellQName> getQNameList();
 
   @Nullable
   HaskellScontext getScontext();
@@ -30,13 +22,12 @@ public interface HaskellClassDeclaration extends HaskellDeclarationElement {
   @NotNull
   List<HaskellTtype> getTtypeList();
 
-  @NotNull
-  List<HaskellTypeSignature> getTypeSignatureList();
-
   String getName();
 
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

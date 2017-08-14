@@ -27,26 +27,14 @@ public class HaskellNewconstrImpl extends HaskellCompositeElementImpl implements
 
   @Override
   @Nullable
-  public HaskellGtycon getGtycon() {
-    return findChildByClass(HaskellGtycon.class);
-  }
-
-  @Override
-  @Nullable
   public HaskellNewconstrFielddecl getNewconstrFielddecl() {
-    return findChildByClass(HaskellNewconstrFielddecl.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellNewconstrFielddecl.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
@@ -59,12 +47,6 @@ public class HaskellNewconstrImpl extends HaskellCompositeElementImpl implements
   @NotNull
   public List<HaskellTypeSignature> getTypeSignatureList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
   }
 
 }

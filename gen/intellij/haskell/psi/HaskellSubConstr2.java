@@ -8,21 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface HaskellSubConstr2 extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellGtycon> getGtyconList();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @Nullable
-  HaskellQvarOp getQvarOp();
+  List<HaskellQName> getQNameList();
 
   @NotNull
   List<HaskellTtype> getTtypeList();
 
   @NotNull
   List<HaskellTypeSignature> getTypeSignatureList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
 
 }

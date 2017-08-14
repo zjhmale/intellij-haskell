@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface HaskellFixityDeclaration extends HaskellCompositeElement {
 
   @NotNull
-  HaskellFixity getFixity();
-
-  @NotNull
-  HaskellOps getOps();
+  HaskellQNames getQNames();
 
 }

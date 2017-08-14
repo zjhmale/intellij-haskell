@@ -27,20 +27,8 @@ public class HaskellSubConstr2Impl extends HaskellCompositeElementImpl implement
 
   @Override
   @NotNull
-  public List<HaskellGtycon> getGtyconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellGtycon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvarOp getQvarOp() {
-    return findChildByClass(HaskellQvarOp.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
@@ -53,12 +41,6 @@ public class HaskellSubConstr2Impl extends HaskellCompositeElementImpl implement
   @NotNull
   public List<HaskellTypeSignature> getTypeSignatureList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
   }
 
 }

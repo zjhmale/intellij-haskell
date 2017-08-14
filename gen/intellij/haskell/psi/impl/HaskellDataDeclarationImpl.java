@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellDataDeclarationImpl extends HaskellCompositeElementImpl implements HaskellDataDeclaration {
@@ -28,9 +29,15 @@ public class HaskellDataDeclarationImpl extends HaskellCompositeElementImpl impl
   }
 
   @Override
-  @NotNull
-  public List<HaskellCdecl> getCdeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellCdecl.class);
+  @Nullable
+  public HaskellCcontext getCcontext() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCcontext.class);
+  }
+
+  @Override
+  @Nullable
+  public HaskellCidecls getCidecls() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCidecls.class);
   }
 
   @Override
@@ -59,26 +66,14 @@ public class HaskellDataDeclarationImpl extends HaskellCompositeElementImpl impl
 
   @Override
   @Nullable
-  public HaskellContext getContext() {
-    return findChildByClass(HaskellContext.class);
-  }
-
-  @Override
-  @Nullable
   public HaskellCtypePragma getCtypePragma() {
-    return findChildByClass(HaskellCtypePragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellCtypePragma.class);
   }
 
   @Override
   @Nullable
   public HaskellDataDeclarationDeriving getDataDeclarationDeriving() {
-    return findChildByClass(HaskellDataDeclarationDeriving.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellExpression.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellDataDeclarationDeriving.class);
   }
 
   @Override
@@ -89,14 +84,26 @@ public class HaskellDataDeclarationImpl extends HaskellCompositeElementImpl impl
 
   @Override
   @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
+  }
+
+  @Override
+  @Nullable
+  public HaskellScontext getScontext() {
+    return PsiTreeUtil.getChildOfType(this, HaskellScontext.class);
   }
 
   @Override
   @NotNull
   public List<HaskellSimpletype> getSimpletypeList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellSimpletype.class);
+  }
+
+  @Override
+  @NotNull
+  public List<HaskellTypeSignature> getTypeSignatureList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
   }
 
   public String getName() {
@@ -111,7 +118,7 @@ public class HaskellDataDeclarationImpl extends HaskellCompositeElementImpl impl
     return HaskellPsiImplUtil.getIdentifierElements(this);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

@@ -8,21 +8,15 @@ import com.intellij.psi.PsiElement;
 public interface HaskellNoinlinePragma extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellFixity> getFixityList();
+  List<HaskellInlinePragmas> getInlinePragmasList();
 
   @NotNull
-  List<HaskellLiteral> getLiteralList();
+  List<HaskellQName> getQNameList();
 
   @NotNull
-  List<HaskellQcon> getQconList();
+  List<HaskellReservedId> getReservedIdList();
 
   @NotNull
-  List<HaskellQconOp> getQconOpList();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @NotNull
-  List<HaskellQvarOp> getQvarOpList();
+  List<HaskellSccPragma> getSccPragmaList();
 
 }

@@ -25,4 +25,10 @@ public class HaskellListTypeImpl extends HaskellCompositeElementImpl implements 
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public HaskellQName getQName() {
+    return PsiTreeUtil.getChildOfType(this, HaskellQName.class);
+  }
+
 }

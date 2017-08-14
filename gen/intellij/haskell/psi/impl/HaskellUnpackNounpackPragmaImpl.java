@@ -27,14 +27,20 @@ public class HaskellUnpackNounpackPragmaImpl extends HaskellCompositeElementImpl
 
   @Override
   @Nullable
+  public HaskellCtypePragma getCtypePragma() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCtypePragma.class);
+  }
+
+  @Override
+  @Nullable
   public HaskellNounpackPragma getNounpackPragma() {
-    return findChildByClass(HaskellNounpackPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellNounpackPragma.class);
   }
 
   @Override
   @Nullable
   public HaskellUnpackPragma getUnpackPragma() {
-    return findChildByClass(HaskellUnpackPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellUnpackPragma.class);
   }
 
 }

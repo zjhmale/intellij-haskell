@@ -28,7 +28,7 @@ public class HaskellSpecializePragmaImpl extends HaskellCompositeElementImpl imp
   @Override
   @NotNull
   public HaskellGeneralPragmaContent getGeneralPragmaContent() {
-    return findNotNullChildByClass(HaskellGeneralPragmaContent.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellGeneralPragmaContent.class));
   }
 
 }

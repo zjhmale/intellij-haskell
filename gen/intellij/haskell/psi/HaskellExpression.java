@@ -7,13 +7,22 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellExpression extends HaskellCompositeElement {
 
-  @Nullable
-  HaskellFirstLineExpression getFirstLineExpression();
+  @NotNull
+  List<HaskellInlinePragmas> getInlinePragmasList();
 
   @NotNull
-  HaskellLastLineExpression getLastLineExpression();
+  List<HaskellQName> getQNameList();
 
   @NotNull
-  List<HaskellLineExpression> getLineExpressionList();
+  List<HaskellReservedId> getReservedIdList();
+
+  @NotNull
+  List<HaskellSccPragma> getSccPragmaList();
+
+  @NotNull
+  List<HaskellTypeDeclaration> getTypeDeclarationList();
+
+  @NotNull
+  List<HaskellTypeSignature> getTypeSignatureList();
 
 }

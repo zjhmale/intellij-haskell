@@ -27,8 +27,8 @@ public class HaskellLanguagePragmaImpl extends HaskellCompositeElementImpl imple
 
   @Override
   @NotNull
-  public List<HaskellQcon> getQconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQcon.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
 }

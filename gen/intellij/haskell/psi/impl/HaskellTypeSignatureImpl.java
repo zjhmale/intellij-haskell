@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellTypeSignatureImpl extends HaskellCompositeElementImpl implements HaskellTypeSignature {
@@ -28,33 +29,21 @@ public class HaskellTypeSignatureImpl extends HaskellCompositeElementImpl implem
   }
 
   @Override
-  @Nullable
-  public HaskellContext getContext() {
-    return findChildByClass(HaskellContext.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellScontext getScontext() {
-    return findChildByClass(HaskellScontext.class);
+  @NotNull
+  public List<HaskellCcontext> getCcontextList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellCcontext.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellTtype> getTtypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellVarId getVarId() {
-    return findChildByClass(HaskellVarId.class);
+  public List<HaskellQNames> getQNamesList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQNames.class);
   }
 
   @Override
   @NotNull
-  public HaskellVars getVars() {
-    return findNotNullChildByClass(HaskellVars.class);
+  public HaskellTtype getTtype() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellTtype.class));
   }
 
   public String getName() {
@@ -67,6 +56,10 @@ public class HaskellTypeSignatureImpl extends HaskellCompositeElementImpl implem
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

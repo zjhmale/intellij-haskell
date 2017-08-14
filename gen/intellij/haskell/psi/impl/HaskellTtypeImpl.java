@@ -26,21 +26,15 @@ public class HaskellTtypeImpl extends HaskellCompositeElementImpl implements Has
   }
 
   @Override
-  @NotNull
-  public List<HaskellGtycon> getGtyconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellGtycon.class);
-  }
-
-  @Override
   @Nullable
   public HaskellListType getListType() {
-    return findChildByClass(HaskellListType.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellListType.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
@@ -56,15 +50,9 @@ public class HaskellTtypeImpl extends HaskellCompositeElementImpl implements Has
   }
 
   @Override
-  @NotNull
-  public List<HaskellVarId> getVarIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarId.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
+  @Nullable
+  public HaskellVarsym getVarsym() {
+    return PsiTreeUtil.getChildOfType(this, HaskellVarsym.class);
   }
 
 }

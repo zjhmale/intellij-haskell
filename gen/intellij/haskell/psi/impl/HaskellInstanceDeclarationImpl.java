@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellInstanceDeclarationImpl extends HaskellCompositeElementImpl implements HaskellInstanceDeclaration {
@@ -28,45 +29,45 @@ public class HaskellInstanceDeclarationImpl extends HaskellCompositeElementImpl 
   }
 
   @Override
-  @NotNull
-  public List<HaskellExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellExpression.class);
+  @Nullable
+  public HaskellCidecls getCidecls() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCidecls.class);
   }
 
   @Override
-  @NotNull
-  public List<HaskellIdecl> getIdeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellIdecl.class);
+  @Nullable
+  public HaskellIncoherentPragma getIncoherentPragma() {
+    return PsiTreeUtil.getChildOfType(this, HaskellIncoherentPragma.class);
   }
 
   @Override
   @NotNull
   public HaskellInst getInst() {
-    return findNotNullChildByClass(HaskellInst.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellInst.class));
   }
 
   @Override
   @Nullable
   public HaskellOverlapPragma getOverlapPragma() {
-    return findChildByClass(HaskellOverlapPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellOverlapPragma.class);
   }
 
   @Override
   @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
+  public HaskellQName getQName() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQName.class));
   }
 
   @Override
   @Nullable
   public HaskellScontext getScontext() {
-    return findChildByClass(HaskellScontext.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellScontext.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellVarId> getVarIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarId.class);
+  public List<HaskellVarCon> getVarConList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarCon.class);
   }
 
   public String getName() {
@@ -79,6 +80,10 @@ public class HaskellInstanceDeclarationImpl extends HaskellCompositeElementImpl 
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

@@ -27,38 +27,20 @@ public class HaskellClazzImpl extends HaskellCompositeElementImpl implements Has
 
   @Override
   @NotNull
-  public List<HaskellGtycon> getGtyconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellGtycon.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
-  @NotNull
-  public List<HaskellQcon> getQconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTtype> getTtypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
+  @Nullable
+  public HaskellTtype getTtype() {
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
   @Override
   @NotNull
   public List<HaskellTypeSignature> getTypeSignatureList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
   }
 
 }

@@ -8,12 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface HaskellInstvar extends HaskellCompositeElement {
 
   @Nullable
-  HaskellGconSym getGconSym();
-
-  @Nullable
-  HaskellQcon getQcon();
-
-  @Nullable
-  HaskellQvar getQvar();
+  HaskellQName getQName();
 
 }

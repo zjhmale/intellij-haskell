@@ -27,20 +27,8 @@ public class HaskellInstvarImpl extends HaskellCompositeElementImpl implements H
 
   @Override
   @Nullable
-  public HaskellGconSym getGconSym() {
-    return findChildByClass(HaskellGconSym.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvar getQvar() {
-    return findChildByClass(HaskellQvar.class);
+  public HaskellQName getQName() {
+    return PsiTreeUtil.getChildOfType(this, HaskellQName.class);
   }
 
 }

@@ -34,31 +34,19 @@ public class HaskellExportImpl extends HaskellCompositeElementImpl implements Ha
   @Override
   @Nullable
   public HaskellDotDotParens getDotDotParens() {
-    return findChildByClass(HaskellDotDotParens.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellDotDotParens.class);
   }
 
   @Override
   @Nullable
-  public HaskellModId getModId() {
-    return findChildByClass(HaskellModId.class);
+  public HaskellModid getModid() {
+    return PsiTreeUtil.getChildOfType(this, HaskellModid.class);
   }
 
   @Override
   @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvar getQvar() {
-    return findChildByClass(HaskellQvar.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvarOp getQvarOp() {
-    return findChildByClass(HaskellQvarOp.class);
+  public HaskellQCon getQCon() {
+    return PsiTreeUtil.getChildOfType(this, HaskellQCon.class);
   }
 
 }

@@ -5,15 +5,16 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellInstanceDeclaration extends HaskellDeclarationElement {
 
-  @NotNull
-  List<HaskellExpression> getExpressionList();
+  @Nullable
+  HaskellCidecls getCidecls();
 
-  @NotNull
-  List<HaskellIdecl> getIdeclList();
+  @Nullable
+  HaskellIncoherentPragma getIncoherentPragma();
 
   @NotNull
   HaskellInst getInst();
@@ -22,18 +23,20 @@ public interface HaskellInstanceDeclaration extends HaskellDeclarationElement {
   HaskellOverlapPragma getOverlapPragma();
 
   @NotNull
-  HaskellQcon getQcon();
+  HaskellQName getQName();
 
   @Nullable
   HaskellScontext getScontext();
 
   @NotNull
-  List<HaskellVarId> getVarIdList();
+  List<HaskellVarCon> getVarConList();
 
   String getName();
 
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

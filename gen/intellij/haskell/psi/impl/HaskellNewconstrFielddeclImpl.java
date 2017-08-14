@@ -27,20 +27,14 @@ public class HaskellNewconstrFielddeclImpl extends HaskellCompositeElementImpl i
 
   @Override
   @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellQvar getQvar() {
-    return findNotNullChildByClass(HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @NotNull
   public HaskellTtype getTtype() {
-    return findNotNullChildByClass(HaskellTtype.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellTtype.class));
   }
 
 }

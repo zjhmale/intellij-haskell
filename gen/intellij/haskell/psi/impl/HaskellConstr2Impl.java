@@ -27,14 +27,14 @@ public class HaskellConstr2Impl extends HaskellCompositeElementImpl implements H
 
   @Override
   @NotNull
-  public HaskellQconOp getQconOp() {
-    return findNotNullChildByClass(HaskellQconOp.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellSubConstr2> getSubConstr2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellSubConstr2.class);
+  public List<HaskellTtype> getTtypeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
   }
 
   @Override

@@ -8,24 +8,15 @@ import com.intellij.psi.PsiElement;
 public interface HaskellNewconstr extends HaskellCompositeElement {
 
   @Nullable
-  HaskellGtycon getGtycon();
-
-  @Nullable
   HaskellNewconstrFielddecl getNewconstrFielddecl();
 
-  @Nullable
-  HaskellQcon getQcon();
-
   @NotNull
-  List<HaskellQvar> getQvarList();
+  List<HaskellQName> getQNameList();
 
   @NotNull
   List<HaskellTtype> getTtypeList();
 
   @NotNull
   List<HaskellTypeSignature> getTypeSignatureList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
 
 }

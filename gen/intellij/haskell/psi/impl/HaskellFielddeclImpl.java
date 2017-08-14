@@ -26,21 +26,15 @@ public class HaskellFielddeclImpl extends HaskellCompositeElementImpl implements
   }
 
   @Override
-  @Nullable
-  public HaskellGtycon getGtycon() {
-    return findChildByClass(HaskellGtycon.class);
+  @NotNull
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvarOp getQvarOp() {
-    return findChildByClass(HaskellQvarOp.class);
+  public HaskellQNames getQNames() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQNames.class));
   }
 
   @Override
@@ -58,19 +52,7 @@ public class HaskellFielddeclImpl extends HaskellCompositeElementImpl implements
   @Override
   @Nullable
   public HaskellUnpackNounpackPragma getUnpackNounpackPragma() {
-    return findChildByClass(HaskellUnpackNounpackPragma.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellVars getVars() {
-    return findNotNullChildByClass(HaskellVars.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellUnpackNounpackPragma.class);
   }
 
 }

@@ -27,45 +27,21 @@ public class HaskellSimpletypeImpl extends HaskellCompositeElementImpl implement
   }
 
   @Override
-  @Nullable
-  public HaskellGconSym getGconSym() {
-    return findChildByClass(HaskellGconSym.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQconOp getQconOp() {
-    return findChildByClass(HaskellQconOp.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvarOp getQvarOp() {
-    return findChildByClass(HaskellQvarOp.class);
+  @NotNull
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @Nullable
   public HaskellTtype getTtype() {
-    return findChildByClass(HaskellTtype.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
   @Override
   @NotNull
   public List<HaskellTypeSignature> getTypeSignatureList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarId> getVarIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarId.class);
   }
 
   public Seq<HaskellNamedElement> getIdentifierElements() {

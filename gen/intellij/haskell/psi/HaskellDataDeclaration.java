@@ -5,12 +5,16 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellDataDeclaration extends HaskellDataConstructorDeclarationElement {
 
-  @NotNull
-  List<HaskellCdecl> getCdeclList();
+  @Nullable
+  HaskellCcontext getCcontext();
+
+  @Nullable
+  HaskellCidecls getCidecls();
 
   @NotNull
   List<HaskellConstr1> getConstr1List();
@@ -25,25 +29,25 @@ public interface HaskellDataDeclaration extends HaskellDataConstructorDeclaratio
   List<HaskellConstr4> getConstr4List();
 
   @Nullable
-  HaskellContext getContext();
-
-  @Nullable
   HaskellCtypePragma getCtypePragma();
 
   @Nullable
   HaskellDataDeclarationDeriving getDataDeclarationDeriving();
 
   @NotNull
-  List<HaskellExpression> getExpressionList();
-
-  @NotNull
   List<HaskellKindSignature> getKindSignatureList();
 
   @NotNull
-  List<HaskellQvar> getQvarList();
+  List<HaskellQName> getQNameList();
+
+  @Nullable
+  HaskellScontext getScontext();
 
   @NotNull
   List<HaskellSimpletype> getSimpletypeList();
+
+  @NotNull
+  List<HaskellTypeSignature> getTypeSignatureList();
 
   String getName();
 
@@ -51,7 +55,7 @@ public interface HaskellDataDeclaration extends HaskellDataConstructorDeclaratio
 
   Seq<HaskellNamedElement> getIdentifierElements();
 
-  String getModuleName();
+  Option<String> getModuleName();
 
   HaskellNamedElement getDataTypeConstructor();
 

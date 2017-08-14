@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
+import scala.Option;
 
 public class HaskellImportDeclarationImpl extends HaskellCompositeElementImpl implements HaskellImportDeclaration {
 
@@ -27,35 +28,41 @@ public class HaskellImportDeclarationImpl extends HaskellCompositeElementImpl im
 
   @Override
   @Nullable
-  public HaskellImportModule getImportModule() {
-    return findChildByClass(HaskellImportModule.class);
+  public HaskellImportPackageName getImportPackageName() {
+    return PsiTreeUtil.getChildOfType(this, HaskellImportPackageName.class);
   }
 
   @Override
   @Nullable
   public HaskellImportQualified getImportQualified() {
-    return findChildByClass(HaskellImportQualified.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportQualified.class);
   }
 
   @Override
   @Nullable
   public HaskellImportQualifiedAs getImportQualifiedAs() {
-    return findChildByClass(HaskellImportQualifiedAs.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportQualifiedAs.class);
   }
 
   @Override
   @Nullable
   public HaskellImportSpec getImportSpec() {
-    return findChildByClass(HaskellImportSpec.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportSpec.class);
+  }
+
+  @Override
+  @Nullable
+  public HaskellModid getModid() {
+    return PsiTreeUtil.getChildOfType(this, HaskellModid.class);
   }
 
   @Override
   @Nullable
   public HaskellSourcePragma getSourcePragma() {
-    return findChildByClass(HaskellSourcePragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellSourcePragma.class);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

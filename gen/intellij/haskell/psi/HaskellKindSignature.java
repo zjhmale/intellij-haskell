@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface HaskellKindSignature extends HaskellCompositeElement {
 
   @NotNull
-  HaskellTtype getTtype();
+  HaskellQName getQName();
 
   @NotNull
-  HaskellVarId getVarId();
+  HaskellTtype getTtype();
 
 }

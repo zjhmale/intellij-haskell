@@ -7,14 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellTtype extends HaskellCompositeElement {
 
-  @NotNull
-  List<HaskellGtycon> getGtyconList();
-
   @Nullable
   HaskellListType getListType();
 
   @NotNull
-  List<HaskellQvar> getQvarList();
+  List<HaskellQName> getQNameList();
 
   @NotNull
   List<HaskellTtype> getTtypeList();
@@ -22,10 +19,7 @@ public interface HaskellTtype extends HaskellCompositeElement {
   @NotNull
   List<HaskellTypeSignature> getTypeSignatureList();
 
-  @NotNull
-  List<HaskellVarId> getVarIdList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
+  @Nullable
+  HaskellVarsym getVarsym();
 
 }

@@ -33,8 +33,8 @@ public class HaskellConstr1Impl extends HaskellCompositeElementImpl implements H
 
   @Override
   @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
+  public HaskellQName getQName() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQName.class));
   }
 
   @Override

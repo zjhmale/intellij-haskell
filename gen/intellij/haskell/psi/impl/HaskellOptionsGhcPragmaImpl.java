@@ -27,8 +27,8 @@ public class HaskellOptionsGhcPragmaImpl extends HaskellCompositeElementImpl imp
 
   @Override
   @NotNull
-  public HaskellGeneralPragmaContent getGeneralPragmaContent() {
-    return findNotNullChildByClass(HaskellGeneralPragmaContent.class);
+  public List<HaskellOptionsGhcOption> getOptionsGhcOptionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellOptionsGhcOption.class);
   }
 
 }

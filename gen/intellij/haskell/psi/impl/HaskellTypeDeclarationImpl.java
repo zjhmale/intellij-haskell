@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellTypeDeclarationImpl extends HaskellCompositeElementImpl implements HaskellTypeDeclaration {
@@ -30,31 +31,31 @@ public class HaskellTypeDeclarationImpl extends HaskellCompositeElementImpl impl
   @Override
   @Nullable
   public HaskellExpression getExpression() {
-    return findChildByClass(HaskellExpression.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellExpression.class);
   }
 
   @Override
-  @Nullable
-  public HaskellKindSignature getKindSignature() {
-    return findChildByClass(HaskellKindSignature.class);
+  @NotNull
+  public List<HaskellKindSignature> getKindSignatureList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellKindSignature.class);
   }
 
   @Override
   @NotNull
   public HaskellSimpletype getSimpletype() {
-    return findNotNullChildByClass(HaskellSimpletype.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellSimpletype.class));
   }
 
   @Override
   @Nullable
   public HaskellTtype getTtype() {
-    return findChildByClass(HaskellTtype.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
   @Override
   @Nullable
   public HaskellTypeSignature getTypeSignature() {
-    return findChildByClass(HaskellTypeSignature.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTypeSignature.class);
   }
 
   public String getName() {
@@ -67,6 +68,10 @@ public class HaskellTypeDeclarationImpl extends HaskellCompositeElementImpl impl
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

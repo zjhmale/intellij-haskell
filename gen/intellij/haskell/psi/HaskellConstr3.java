@@ -8,27 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface HaskellConstr3 extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellGtycon> getGtyconList();
+  HaskellQName getQName();
 
   @NotNull
-  HaskellQcon getQcon();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @NotNull
-  List<HaskellQvarOp> getQvarOpList();
-
-  @NotNull
-  List<HaskellTtype> getTtypeList();
-
-  @NotNull
-  List<HaskellTypeSignature> getTypeSignatureList();
+  List<HaskellSubConstr2> getSubConstr2List();
 
   @NotNull
   List<HaskellUnpackNounpackPragma> getUnpackNounpackPragmaList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
 
 }

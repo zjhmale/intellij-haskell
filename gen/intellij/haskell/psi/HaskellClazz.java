@@ -8,21 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface HaskellClazz extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellGtycon> getGtyconList();
+  List<HaskellQName> getQNameList();
 
-  @NotNull
-  List<HaskellQcon> getQconList();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @NotNull
-  List<HaskellTtype> getTtypeList();
+  @Nullable
+  HaskellTtype getTtype();
 
   @NotNull
   List<HaskellTypeSignature> getTypeSignatureList();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
 
 }

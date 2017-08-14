@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellModuleDeclarationImpl extends HaskellCompositeElementImpl implements HaskellModuleDeclaration {
@@ -30,25 +31,19 @@ public class HaskellModuleDeclarationImpl extends HaskellCompositeElementImpl im
   @Override
   @Nullable
   public HaskellDeprecatedWarnPragma getDeprecatedWarnPragma() {
-    return findChildByClass(HaskellDeprecatedWarnPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellDeprecatedWarnPragma.class);
   }
 
   @Override
   @Nullable
   public HaskellExports getExports() {
-    return findChildByClass(HaskellExports.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellExpression getExpression() {
-    return findChildByClass(HaskellExpression.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellExports.class);
   }
 
   @Override
   @NotNull
-  public HaskellModId getModId() {
-    return findNotNullChildByClass(HaskellModId.class);
+  public HaskellModid getModid() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellModid.class));
   }
 
   public String getName() {
@@ -63,7 +58,7 @@ public class HaskellModuleDeclarationImpl extends HaskellCompositeElementImpl im
     return HaskellPsiImplUtil.getIdentifierElements(this);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

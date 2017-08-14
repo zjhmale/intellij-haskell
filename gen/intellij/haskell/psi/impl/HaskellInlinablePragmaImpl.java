@@ -28,7 +28,7 @@ public class HaskellInlinablePragmaImpl extends HaskellCompositeElementImpl impl
   @Override
   @NotNull
   public HaskellGeneralPragmaContent getGeneralPragmaContent() {
-    return findNotNullChildByClass(HaskellGeneralPragmaContent.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellGeneralPragmaContent.class));
   }
 
 }

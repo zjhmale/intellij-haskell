@@ -28,19 +28,19 @@ public class HaskellImportSpecImpl extends HaskellCompositeElementImpl implement
   @Override
   @Nullable
   public HaskellImportEmptySpec getImportEmptySpec() {
-    return findChildByClass(HaskellImportEmptySpec.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportEmptySpec.class);
   }
 
   @Override
   @Nullable
   public HaskellImportHidingSpec getImportHidingSpec() {
-    return findChildByClass(HaskellImportHidingSpec.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportHidingSpec.class);
   }
 
   @Override
   @Nullable
   public HaskellImportIdsSpec getImportIdsSpec() {
-    return findChildByClass(HaskellImportIdsSpec.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellImportIdsSpec.class);
   }
 
 }

@@ -7,14 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellInst extends HaskellCompositeElement {
 
-  @Nullable
-  HaskellGtycon getGtycon();
+  @NotNull
+  List<HaskellGtycon> getGtyconList();
 
   @NotNull
   List<HaskellInstvar> getInstvarList();
-
-  @Nullable
-  HaskellQvar getQvar();
 
   @Nullable
   HaskellTtype getTtype();

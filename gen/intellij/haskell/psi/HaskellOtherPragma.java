@@ -23,6 +23,12 @@ public interface HaskellOtherPragma extends HaskellCompositeElement {
   HaskellInlinablePragma getInlinablePragma();
 
   @Nullable
+  HaskellInlineFusedPragma getInlineFusedPragma();
+
+  @Nullable
+  HaskellInlineInnerPragma getInlineInnerPragma();
+
+  @Nullable
   HaskellInlinePragma getInlinePragma();
 
   @Nullable

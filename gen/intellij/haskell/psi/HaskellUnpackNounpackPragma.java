@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface HaskellUnpackNounpackPragma extends HaskellCompositeElement {
 
   @Nullable
+  HaskellCtypePragma getCtypePragma();
+
+  @Nullable
   HaskellNounpackPragma getNounpackPragma();
 
   @Nullable

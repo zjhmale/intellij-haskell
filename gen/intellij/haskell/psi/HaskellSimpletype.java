@@ -8,26 +8,14 @@ import scala.collection.Seq;
 
 public interface HaskellSimpletype extends HaskellCompositeElement {
 
-  @Nullable
-  HaskellGconSym getGconSym();
-
-  @Nullable
-  HaskellQcon getQcon();
-
-  @Nullable
-  HaskellQconOp getQconOp();
-
-  @Nullable
-  HaskellQvarOp getQvarOp();
+  @NotNull
+  List<HaskellQName> getQNameList();
 
   @Nullable
   HaskellTtype getTtype();
 
   @NotNull
   List<HaskellTypeSignature> getTypeSignatureList();
-
-  @NotNull
-  List<HaskellVarId> getVarIdList();
 
   Seq<HaskellNamedElement> getIdentifierElements();
 

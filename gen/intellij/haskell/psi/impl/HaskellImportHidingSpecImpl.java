@@ -28,7 +28,7 @@ public class HaskellImportHidingSpecImpl extends HaskellCompositeElementImpl imp
   @Override
   @NotNull
   public HaskellImportHiding getImportHiding() {
-    return findNotNullChildByClass(HaskellImportHiding.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellImportHiding.class));
   }
 
   @Override

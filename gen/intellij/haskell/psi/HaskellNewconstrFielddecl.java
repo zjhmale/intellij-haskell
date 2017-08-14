@@ -8,10 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface HaskellNewconstrFielddecl extends HaskellCompositeElement {
 
   @NotNull
-  HaskellQcon getQcon();
-
-  @NotNull
-  HaskellQvar getQvar();
+  List<HaskellQName> getQNameList();
 
   @NotNull
   HaskellTtype getTtype();

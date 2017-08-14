@@ -28,7 +28,7 @@ public class HaskellIncludePragmaImpl extends HaskellCompositeElementImpl implem
   @Override
   @NotNull
   public HaskellGeneralPragmaContent getGeneralPragmaContent() {
-    return findNotNullChildByClass(HaskellGeneralPragmaContent.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellGeneralPragmaContent.class));
   }
 
 }

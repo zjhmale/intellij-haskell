@@ -28,37 +28,37 @@ public class HaskellFileHeaderPragmaImpl extends HaskellCompositeElementImpl imp
   @Override
   @Nullable
   public HaskellAnnPragma getAnnPragma() {
-    return findChildByClass(HaskellAnnPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellAnnPragma.class);
   }
 
   @Override
   @Nullable
   public HaskellDummyPragma getDummyPragma() {
-    return findChildByClass(HaskellDummyPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellDummyPragma.class);
   }
 
   @Override
   @Nullable
   public HaskellHaddockPragma getHaddockPragma() {
-    return findChildByClass(HaskellHaddockPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellHaddockPragma.class);
   }
 
   @Override
   @Nullable
   public HaskellIncludePragma getIncludePragma() {
-    return findChildByClass(HaskellIncludePragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellIncludePragma.class);
   }
 
   @Override
   @Nullable
   public HaskellLanguagePragma getLanguagePragma() {
-    return findChildByClass(HaskellLanguagePragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellLanguagePragma.class);
   }
 
   @Override
   @Nullable
   public HaskellOptionsGhcPragma getOptionsGhcPragma() {
-    return findChildByClass(HaskellOptionsGhcPragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellOptionsGhcPragma.class);
   }
 
 }

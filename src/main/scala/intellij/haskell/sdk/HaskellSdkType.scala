@@ -19,30 +19,38 @@ package intellij.haskell.sdk
 import java.io.File
 import javax.swing.Icon
 
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots._
+import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil
 import com.intellij.openapi.roots.OrderRootType
-import com.intellij.openapi.util.io.FileUtil
-import intellij.haskell.HaskellIcons
-import intellij.haskell.external.ExternalProcess
+import com.intellij.openapi.util.SystemInfo
+import com.intellij.openapi.vfs.VirtualFile
+import intellij.haskell.external.commandLine.CommandLine
+import intellij.haskell.util.HaskellProjectUtil
+import intellij.haskell.{HaskellIcons, HaskellNotificationGroup}
 import org.jdom.Element
 
-/**
-  * Created GHC SDK because inspection tool forces to use a SDK.
-  */
-class HaskellSdkType extends SdkType("GHC SDK") {
+class HaskellSdkType extends SdkType("Haskell Tool Stack SDK") {
 
-  override def suggestHomePath(): String = "/usr/local/bin"
+  override def suggestHomePath(): String = {
+    if (SystemInfo.isLinux)
+      "/usr/bin/stack"
+    else if (SystemInfo.isMac)
+      "/usr/local/bin/stack"
+    else null
+  }
 
-  override def suggestSdkName(currentSdkName: String, sdkHome: String): String = "GHC"
+  override def suggestSdkName(currentSdkName: String, sdkHome: String): String = "Haskell Tool Stack"
 
   override def createAdditionalDataConfigurable(sdkModel: SdkModel, sdkModificator: SdkModificator): AdditionalDataConfigurable = null
 
   override def isValidSdkHome(path: String): Boolean = {
-    val ghcPath = new File(path)
-    ghcPath.isDirectory && ghcPath.listFiles.map(f => FileUtil.getNameWithoutExtension(f)).contains("ghc")
+    val stackPath = new File(path)
+    stackPath.isFile && path.toLowerCase.contains("stack") && HaskellSdkType.getNumericVersion(path).isDefined
   }
 
-  override def getPresentableName: String = "GHC binaries"
+  override def getPresentableName: String = "Stack binary"
 
   override def saveAdditionalData(additionalData: SdkAdditionalData, additional: Element): Unit = {}
 
@@ -54,18 +62,62 @@ class HaskellSdkType extends SdkType("GHC SDK") {
 
   override def setupSdkPaths(sdk: Sdk): Unit = {}
 
-  override def getVersionString(sdkHome: String): String = HaskellSdkType.getNumericVersion(sdkHome)
+  override def getVersionString(sdkHome: String): String = {
+    if (isValidSdkHome(sdkHome)) {
+      HaskellSdkType.getNumericVersion(sdkHome).getOrElse("-")
+    } else {
+      "-"
+    }
+  }
+
+  override def getHomeChooserDescriptor: FileChooserDescriptor = {
+    val descriptor: FileChooserDescriptor = new FileChooserDescriptor(true, false, false, false, false, false) {
+      @throws[Exception]
+      override def validateSelectedFiles(files: Array[VirtualFile]) {
+        if (files.length != 0) {
+          val selectedPath: String = files(0).getPath
+          var valid = isValidSdkHome(selectedPath)
+          if (!valid) {
+            valid = isValidSdkHome(adjustSelectedSdkHome(selectedPath))
+            if (!valid) {
+              val message = "The selected file is not a valid Stack binary"
+              throw new Exception(message)
+            }
+          }
+        }
+      }
+    }
+    descriptor.setTitle("Select path to " + getPresentableName)
+    descriptor
+  }
 }
 
 object HaskellSdkType {
   def getInstance: HaskellSdkType = SdkType.findInstance(classOf[HaskellSdkType])
 
-  def getNumericVersion(sdkHome: String) = {
-    val output = ExternalProcess.getProcessOutput(
+  def findOrCreateSdk(): Sdk = {
+    SdkConfigurationUtil.findOrCreateSdk(null, getInstance)
+  }
+
+  def getNumericVersion(sdkHome: String): Option[String] = {
+    val workDir = new File(sdkHome).getParent
+    CommandLine.runProgram(
+      None,
+      workDir,
       sdkHome,
-      sdkHome + File.separator + "ghc",
       Seq("--numeric-version")
-    )
-    output.getStdout
+    ).map(_.getStdout)
+  }
+
+  def getStackPath(project: Project): Option[String] = {
+    HaskellProjectUtil.getProjectRootManager(project).flatMap(projectRootManager => {
+      val stackPath = Option(projectRootManager.getProjectSdk).map(_.getHomePath)
+      stackPath match {
+        case Some(_) => stackPath
+        case None =>
+          HaskellNotificationGroup.logErrorBalloonEvent(project, "Path to Haskell Stack binary is not configured in Project SDK setting. Please do and restart Project.")
+          None
+      }
+    })
   }
 }

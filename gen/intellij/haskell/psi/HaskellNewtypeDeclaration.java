@@ -5,12 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellNewtypeDeclaration extends HaskellDataConstructorDeclarationElement {
 
   @Nullable
-  HaskellContext getContext();
+  HaskellCcontext getCcontext();
 
   @Nullable
   HaskellCtypePragma getCtypePragma();
@@ -30,7 +31,7 @@ public interface HaskellNewtypeDeclaration extends HaskellDataConstructorDeclara
 
   Seq<HaskellNamedElement> getIdentifierElements();
 
-  String getModuleName();
+  Option<String> getModuleName();
 
   HaskellNamedElement getDataTypeConstructor();
 

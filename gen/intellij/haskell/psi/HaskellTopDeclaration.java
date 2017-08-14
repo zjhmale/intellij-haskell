@@ -41,12 +41,6 @@ public interface HaskellTopDeclaration extends HaskellCompositeElement {
   HaskellOtherPragma getOtherPragma();
 
   @Nullable
-  HaskellQqExpression getQqExpression();
-
-  @Nullable
-  HaskellQuasiQuote getQuasiQuote();
-
-  @Nullable
   HaskellTypeDeclaration getTypeDeclaration();
 
   @Nullable

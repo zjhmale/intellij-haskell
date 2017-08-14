@@ -4,19 +4,28 @@ package intellij.haskell.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import scala.Option;
 
-public interface HaskellCname extends HaskellCompositeElement {
-
-  @Nullable
-  HaskellQcon getQcon();
+public interface HaskellCname extends HaskellQualifiedNameElement {
 
   @Nullable
-  HaskellQconOp getQconOp();
+  HaskellCon getCon();
 
   @Nullable
-  HaskellQvar getQvar();
+  HaskellConop getConop();
 
   @Nullable
-  HaskellQvarOp getQvarOp();
+  HaskellVar getVar();
+
+  @Nullable
+  HaskellVarop getVarop();
+
+  String getName();
+
+  HaskellNamedElement getIdentifierElement();
+
+  Option<String> getQualifierName();
+
+  String getNameWithoutParens();
 
 }

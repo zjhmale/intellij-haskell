@@ -18,29 +18,19 @@ package intellij.haskell.psi.impl
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
-import com.intellij.psi.{PsiElement, ResolveState}
-import com.intellij.psi.scope.PsiScopeProcessor
-import intellij.haskell.psi.HaskellCompositeElement
-import org.jetbrains.annotations.NotNull
-
-object HaskellCompositeElementImpl {
-  private[impl] def processDeclarations(@NotNull element: PsiElement, @NotNull processor: PsiScopeProcessor, @NotNull state: ResolveState, lastParent: PsiElement, @NotNull place: PsiElement): Boolean = {
-    if (!processor.execute(element, state)) {
-      false
-    }
-    else {
-      ResolveUtil.processChildren(element, processor, state, lastParent, place)
-    }
-  }
-}
+import intellij.haskell.psi._
 
 class HaskellCompositeElementImpl(node: ASTNode) extends ASTWrapperPsiElement(node) with HaskellCompositeElement {
 
   override def toString: String = {
     getNode.getElementType.toString
   }
-
-  override def processDeclarations(@NotNull processor: PsiScopeProcessor, @NotNull state: ResolveState, lastParent: PsiElement, @NotNull place: PsiElement): Boolean = {
-    HaskellCompositeElementImpl.processDeclarations(this, processor, state, lastParent, place)
-  }
 }
+
+abstract class HaskellCNameElementImpl private[impl](node: ASTNode) extends HaskellCompositeElementImpl(node) with HaskellCNameElement
+
+abstract class HaskellLineExpressionElementImpl private[impl](node: ASTNode) extends HaskellCompositeElementImpl(node) with HaskellLineExpressionElement
+
+abstract class HaskellNamedElementImpl private[impl](node: ASTNode) extends HaskellCompositeElementImpl(node) with HaskellNamedElement
+
+abstract class HaskellQualifierElementImpl private[impl](node: ASTNode) extends HaskellNamedElementImpl(node) with HaskellQualifierElement

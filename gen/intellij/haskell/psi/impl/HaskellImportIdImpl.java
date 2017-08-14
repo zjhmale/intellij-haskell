@@ -34,19 +34,7 @@ public class HaskellImportIdImpl extends HaskellCompositeElementImpl implements 
   @Override
   @Nullable
   public HaskellDotDotParens getDotDotParens() {
-    return findChildByClass(HaskellDotDotParens.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @Nullable
-  public HaskellQvar getQvar() {
-    return findChildByClass(HaskellQvar.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellDotDotParens.class);
   }
 
 }

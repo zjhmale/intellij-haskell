@@ -26,15 +26,9 @@ public class HaskellImportQualifiedAsImpl extends HaskellCompositeElementImpl im
   }
 
   @Override
-  @Nullable
-  public HaskellQualifier getQualifier() {
-    return findChildByClass(HaskellQualifier.class);
-  }
-
-  @Override
   @NotNull
-  public HaskellVarId getVarId() {
-    return findNotNullChildByClass(HaskellVarId.class);
+  public HaskellQualifier getQualifier() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQualifier.class));
   }
 
 }

@@ -27,50 +27,20 @@ public class HaskellConstr3Impl extends HaskellCompositeElementImpl implements H
 
   @Override
   @NotNull
-  public List<HaskellGtycon> getGtyconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellGtycon.class);
+  public HaskellQName getQName() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQName.class));
   }
 
   @Override
   @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvarOp> getQvarOpList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvarOp.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTtype> getTtypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTypeSignature> getTypeSignatureList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
+  public List<HaskellSubConstr2> getSubConstr2List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellSubConstr2.class);
   }
 
   @Override
   @NotNull
   public List<HaskellUnpackNounpackPragma> getUnpackNounpackPragmaList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellUnpackNounpackPragma.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
   }
 
 }

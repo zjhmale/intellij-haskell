@@ -4,11 +4,12 @@ package intellij.haskell.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import scala.Option;
 
 public interface HaskellImportDeclaration extends HaskellCompositeElement {
 
   @Nullable
-  HaskellImportModule getImportModule();
+  HaskellImportPackageName getImportPackageName();
 
   @Nullable
   HaskellImportQualified getImportQualified();
@@ -20,8 +21,11 @@ public interface HaskellImportDeclaration extends HaskellCompositeElement {
   HaskellImportSpec getImportSpec();
 
   @Nullable
+  HaskellModid getModid();
+
+  @Nullable
   HaskellSourcePragma getSourcePragma();
 
-  String getModuleName();
+  Option<String> getModuleName();
 
 }

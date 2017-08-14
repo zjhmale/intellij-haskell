@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellDummyPragma extends HaskellCompositeElement {
 
+  @Nullable
+  HaskellQName getQName();
+
 }

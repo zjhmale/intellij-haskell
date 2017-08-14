@@ -26,9 +26,9 @@ public class HaskellInstImpl extends HaskellCompositeElementImpl implements Hask
   }
 
   @Override
-  @Nullable
-  public HaskellGtycon getGtycon() {
-    return findChildByClass(HaskellGtycon.class);
+  @NotNull
+  public List<HaskellGtycon> getGtyconList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellGtycon.class);
   }
 
   @Override
@@ -39,14 +39,8 @@ public class HaskellInstImpl extends HaskellCompositeElementImpl implements Hask
 
   @Override
   @Nullable
-  public HaskellQvar getQvar() {
-    return findChildByClass(HaskellQvar.class);
-  }
-
-  @Override
-  @Nullable
   public HaskellTtype getTtype() {
-    return findChildByClass(HaskellTtype.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
 }

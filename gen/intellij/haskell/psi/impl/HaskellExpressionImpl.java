@@ -26,21 +26,39 @@ public class HaskellExpressionImpl extends HaskellCompositeElementImpl implement
   }
 
   @Override
-  @Nullable
-  public HaskellFirstLineExpression getFirstLineExpression() {
-    return findChildByClass(HaskellFirstLineExpression.class);
+  @NotNull
+  public List<HaskellInlinePragmas> getInlinePragmasList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellInlinePragmas.class);
   }
 
   @Override
   @NotNull
-  public HaskellLastLineExpression getLastLineExpression() {
-    return findNotNullChildByClass(HaskellLastLineExpression.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellLineExpression> getLineExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellLineExpression.class);
+  public List<HaskellReservedId> getReservedIdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellReservedId.class);
+  }
+
+  @Override
+  @NotNull
+  public List<HaskellSccPragma> getSccPragmaList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellSccPragma.class);
+  }
+
+  @Override
+  @NotNull
+  public List<HaskellTypeDeclaration> getTypeDeclarationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeDeclaration.class);
+  }
+
+  @Override
+  @NotNull
+  public List<HaskellTypeSignature> getTypeSignatureList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
   }
 
 }

@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface HaskellConstr2 extends HaskellCompositeElement {
 
   @NotNull
-  HaskellQconOp getQconOp();
+  List<HaskellQName> getQNameList();
 
   @NotNull
-  List<HaskellSubConstr2> getSubConstr2List();
+  List<HaskellTtype> getTtypeList();
 
   @NotNull
   List<HaskellUnpackNounpackPragma> getUnpackNounpackPragmaList();

@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
+import scala.Option;
 
 public class HaskellCnameImpl extends HaskellCompositeElementImpl implements HaskellCname {
 
@@ -27,26 +28,42 @@ public class HaskellCnameImpl extends HaskellCompositeElementImpl implements Has
 
   @Override
   @Nullable
-  public HaskellQcon getQcon() {
-    return findChildByClass(HaskellQcon.class);
+  public HaskellCon getCon() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCon.class);
   }
 
   @Override
   @Nullable
-  public HaskellQconOp getQconOp() {
-    return findChildByClass(HaskellQconOp.class);
+  public HaskellConop getConop() {
+    return PsiTreeUtil.getChildOfType(this, HaskellConop.class);
   }
 
   @Override
   @Nullable
-  public HaskellQvar getQvar() {
-    return findChildByClass(HaskellQvar.class);
+  public HaskellVar getVar() {
+    return PsiTreeUtil.getChildOfType(this, HaskellVar.class);
   }
 
   @Override
   @Nullable
-  public HaskellQvarOp getQvarOp() {
-    return findChildByClass(HaskellQvarOp.class);
+  public HaskellVarop getVarop() {
+    return PsiTreeUtil.getChildOfType(this, HaskellVarop.class);
+  }
+
+  public String getName() {
+    return HaskellPsiImplUtil.getName(this);
+  }
+
+  public HaskellNamedElement getIdentifierElement() {
+    return HaskellPsiImplUtil.getIdentifierElement(this);
+  }
+
+  public Option<String> getQualifierName() {
+    return HaskellPsiImplUtil.getQualifierName(this);
+  }
+
+  public String getNameWithoutParens() {
+    return HaskellPsiImplUtil.getNameWithoutParens(this);
   }
 
 }

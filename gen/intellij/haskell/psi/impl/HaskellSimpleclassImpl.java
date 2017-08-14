@@ -26,51 +26,15 @@ public class HaskellSimpleclassImpl extends HaskellCompositeElementImpl implemen
   }
 
   @Override
+  @NotNull
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
+  }
+
+  @Override
   @Nullable
-  public HaskellGtycon getGtycon() {
-    return findChildByClass(HaskellGtycon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQcon> getQconList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQconOp> getQconOpList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQconOp.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellSimpleclassTildePart> getSimpleclassTildePartList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellSimpleclassTildePart.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTtype> getTtypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTypeSignature> getTypeSignatureList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellVarSym> getVarSymList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellVarSym.class);
+  public HaskellTtype getTtype() {
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
 }

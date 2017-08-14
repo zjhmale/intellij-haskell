@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellClassDeclarationImpl extends HaskellCompositeElementImpl implements HaskellClassDeclaration {
@@ -28,51 +29,27 @@ public class HaskellClassDeclarationImpl extends HaskellCompositeElementImpl imp
   }
 
   @Override
-  @NotNull
-  public List<HaskellCdecl> getCdeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellCdecl.class);
-  }
-
-  @Override
   @Nullable
-  public HaskellContext getContext() {
-    return findChildByClass(HaskellContext.class);
+  public HaskellCidecls getCidecls() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCidecls.class);
   }
 
   @Override
   @NotNull
-  public List<HaskellExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellExpression.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellQvar> getQvarList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override
   @Nullable
   public HaskellScontext getScontext() {
-    return findChildByClass(HaskellScontext.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellScontext.class);
   }
 
   @Override
   @NotNull
   public List<HaskellTtype> getTtypeList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTtype.class);
-  }
-
-  @Override
-  @NotNull
-  public List<HaskellTypeSignature> getTypeSignatureList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellTypeSignature.class);
   }
 
   public String getName() {
@@ -85,6 +62,10 @@ public class HaskellClassDeclarationImpl extends HaskellCompositeElementImpl imp
 
   public Seq<HaskellNamedElement> getIdentifierElements() {
     return HaskellPsiImplUtil.getIdentifierElements(this);
+  }
+
+  public Option<String> getModuleName() {
+    return HaskellPsiImplUtil.getModuleName(this);
   }
 
 }

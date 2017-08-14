@@ -8,13 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface HaskellModuleBody extends HaskellCompositeElement {
 
   @NotNull
-  List<HaskellCfilesPragma> getCfilesPragmaList();
+  HaskellImportDeclarations getImportDeclarations();
 
-  @NotNull
-  List<HaskellImportDeclaration> getImportDeclarationList();
-
-  @NotNull
-  List<HaskellModuleDeclaration> getModuleDeclarationList();
+  @Nullable
+  HaskellModuleDeclaration getModuleDeclaration();
 
   @NotNull
   List<HaskellTopDeclaration> getTopDeclarationList();

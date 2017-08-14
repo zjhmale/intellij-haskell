@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellDerivingDeclaration extends HaskellDeclarationElement {
@@ -13,7 +14,7 @@ public interface HaskellDerivingDeclaration extends HaskellDeclarationElement {
   HaskellInst getInst();
 
   @NotNull
-  HaskellQcon getQcon();
+  HaskellQName getQName();
 
   @Nullable
   HaskellScontext getScontext();
@@ -23,5 +24,7 @@ public interface HaskellDerivingDeclaration extends HaskellDeclarationElement {
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

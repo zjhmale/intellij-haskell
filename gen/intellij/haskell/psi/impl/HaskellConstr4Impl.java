@@ -27,20 +27,8 @@ public class HaskellConstr4Impl extends HaskellCompositeElementImpl implements H
 
   @Override
   @NotNull
-  public HaskellGconSym getGconSym() {
-    return findNotNullChildByClass(HaskellGconSym.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellQcon getQcon() {
-    return findNotNullChildByClass(HaskellQcon.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellQvar getQvar() {
-    return findNotNullChildByClass(HaskellQvar.class);
+  public List<HaskellQName> getQNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, HaskellQName.class);
   }
 
   @Override

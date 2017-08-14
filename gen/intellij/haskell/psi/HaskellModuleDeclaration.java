@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellModuleDeclaration extends HaskellDeclarationElement {
@@ -15,11 +16,8 @@ public interface HaskellModuleDeclaration extends HaskellDeclarationElement {
   @Nullable
   HaskellExports getExports();
 
-  @Nullable
-  HaskellExpression getExpression();
-
   @NotNull
-  HaskellModId getModId();
+  HaskellModid getModid();
 
   String getName();
 
@@ -27,6 +25,6 @@ public interface HaskellModuleDeclaration extends HaskellDeclarationElement {
 
   Seq<HaskellNamedElement> getIdentifierElements();
 
-  String getModuleName();
+  Option<String> getModuleName();
 
 }

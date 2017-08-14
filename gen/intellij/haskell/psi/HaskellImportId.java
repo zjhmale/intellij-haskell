@@ -13,10 +13,4 @@ public interface HaskellImportId extends HaskellCompositeElement {
   @Nullable
   HaskellDotDotParens getDotDotParens();
 
-  @Nullable
-  HaskellQcon getQcon();
-
-  @Nullable
-  HaskellQvar getQvar();
-
 }

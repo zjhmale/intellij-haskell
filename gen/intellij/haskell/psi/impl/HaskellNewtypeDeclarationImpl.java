@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellNewtypeDeclarationImpl extends HaskellCompositeElementImpl implements HaskellNewtypeDeclaration {
@@ -29,32 +30,32 @@ public class HaskellNewtypeDeclarationImpl extends HaskellCompositeElementImpl i
 
   @Override
   @Nullable
-  public HaskellContext getContext() {
-    return findChildByClass(HaskellContext.class);
+  public HaskellCcontext getCcontext() {
+    return PsiTreeUtil.getChildOfType(this, HaskellCcontext.class);
   }
 
   @Override
   @Nullable
   public HaskellCtypePragma getCtypePragma() {
-    return findChildByClass(HaskellCtypePragma.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellCtypePragma.class);
   }
 
   @Override
   @NotNull
   public HaskellNewconstr getNewconstr() {
-    return findNotNullChildByClass(HaskellNewconstr.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellNewconstr.class));
   }
 
   @Override
   @NotNull
   public HaskellSimpletype getSimpletype() {
-    return findNotNullChildByClass(HaskellSimpletype.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellSimpletype.class));
   }
 
   @Override
   @Nullable
   public HaskellTtype getTtype() {
-    return findChildByClass(HaskellTtype.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTtype.class);
   }
 
   public String getName() {
@@ -69,7 +70,7 @@ public class HaskellNewtypeDeclarationImpl extends HaskellCompositeElementImpl i
     return HaskellPsiImplUtil.getIdentifierElements(this);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

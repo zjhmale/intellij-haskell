@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static intellij.haskell.psi.HaskellTypes.*;
 import intellij.haskell.psi.*;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public class HaskellDefaultDeclarationImpl extends HaskellCompositeElementImpl implements HaskellDefaultDeclaration {
@@ -36,7 +37,7 @@ public class HaskellDefaultDeclarationImpl extends HaskellCompositeElementImpl i
   @Override
   @Nullable
   public HaskellTypeSignature getTypeSignature() {
-    return findChildByClass(HaskellTypeSignature.class);
+    return PsiTreeUtil.getChildOfType(this, HaskellTypeSignature.class);
   }
 
   public String getName() {
@@ -51,7 +52,7 @@ public class HaskellDefaultDeclarationImpl extends HaskellCompositeElementImpl i
     return HaskellPsiImplUtil.getIdentifierElements(this);
   }
 
-  public String getModuleName() {
+  public Option<String> getModuleName() {
     return HaskellPsiImplUtil.getModuleName(this);
   }
 

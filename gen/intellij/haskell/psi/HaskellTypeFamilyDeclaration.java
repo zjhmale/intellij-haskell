@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellTypeFamilyDeclaration extends HaskellDeclarationElement {
@@ -20,5 +21,7 @@ public interface HaskellTypeFamilyDeclaration extends HaskellDeclarationElement 
   ItemPresentation getPresentation();
 
   Seq<HaskellNamedElement> getIdentifierElements();
+
+  Option<String> getModuleName();
 
 }

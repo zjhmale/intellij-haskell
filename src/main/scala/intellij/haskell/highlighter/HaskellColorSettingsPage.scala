@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rik van der Kleij
+ * Copyright 2016 Rik van der Kleij
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import intellij.haskell.HaskellIcons
 import intellij.haskell.highlighter.HaskellSyntaxHighlighter._
 import org.jetbrains.annotations.NotNull
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 object HaskellColorSettingsPage {
   private final val Attrs = Array[AttributesDescriptor](
@@ -43,6 +43,7 @@ object HaskellColorSettingsPage {
     new AttributesDescriptor("Operator", Operator),
     new AttributesDescriptor("Reserved symbol", ReservedSymbol),
     new AttributesDescriptor("Pragma", Pragma),
+    new AttributesDescriptor("Quasiquote", Quasiquote),
     new AttributesDescriptor("Default", Default))
   private final val AttributesKeyMap = Map[String, TextAttributesKey]()
 }
@@ -76,22 +77,24 @@ class HaskellColorSettingsPage extends ColorSettingsPage {
   @NotNull
   def getDemoText: String = {
     "{-# LANGUAGE CPP #-}\n" +
-        "module ModuleName\n" +
-        "import ImportModuleName\n" +
-        "\"string literal\"\n" +
-        "'c'\n" +
-        "x = (456,434)\n" +
-        "-- line comment\n" +
-        "{- nested \n" +
-        "comment -}\n" +
-        "data Bool = True | False\n" +
-        "let l1 = [1, 2] \n" +
-        "let l2 = 1 : [] \n" +
-        "let two = 1 + 1"
+      "module ModuleName\n" +
+      "import ImportModuleName\n" +
+      "\"string literal\"\n" +
+      "'c'\n" +
+      "x = (456,434)\n" +
+      "-- line comment\n" +
+      "{- nested \n" +
+      "comment -}\n" +
+      "data Bool = True | False\n" +
+      "let l1 = [1, 2] \n" +
+      "let l2 = 1 : [] \n" +
+      "let two = 1 + 1 \n" +
+      "let f = \\_ + 1 \n" +
+      "[t|select * from foo|]"
   }
 
   @NotNull
   def getAdditionalHighlightingTagToDescriptorMap: java.util.Map[String, TextAttributesKey] = {
-    HaskellColorSettingsPage.AttributesKeyMap
+    HaskellColorSettingsPage.AttributesKeyMap.asJava
   }
 }

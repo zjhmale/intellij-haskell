@@ -7,22 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellGeneralPragmaContent extends HaskellCompositeElement {
 
-  @NotNull
-  List<HaskellFixity> getFixityList();
-
-  @NotNull
-  List<HaskellLiteral> getLiteralList();
-
-  @NotNull
-  List<HaskellQcon> getQconList();
-
-  @NotNull
-  List<HaskellQconOp> getQconOpList();
-
-  @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @NotNull
-  List<HaskellQvarOp> getQvarOpList();
-
 }

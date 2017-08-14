@@ -7,14 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface HaskellFielddecl extends HaskellCompositeElement {
 
-  @Nullable
-  HaskellGtycon getGtycon();
+  @NotNull
+  List<HaskellQName> getQNameList();
 
   @NotNull
-  List<HaskellQvar> getQvarList();
-
-  @Nullable
-  HaskellQvarOp getQvarOp();
+  HaskellQNames getQNames();
 
   @NotNull
   List<HaskellTtype> getTtypeList();
@@ -24,11 +21,5 @@ public interface HaskellFielddecl extends HaskellCompositeElement {
 
   @Nullable
   HaskellUnpackNounpackPragma getUnpackNounpackPragma();
-
-  @NotNull
-  List<HaskellVarSym> getVarSymList();
-
-  @NotNull
-  HaskellVars getVars();
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
+import scala.Option;
 import scala.collection.Seq;
 
 public interface HaskellForeignDeclaration extends HaskellDeclarationElement {
@@ -18,6 +19,6 @@ public interface HaskellForeignDeclaration extends HaskellDeclarationElement {
 
   Seq<HaskellNamedElement> getIdentifierElements();
 
-  String getModuleName();
+  Option<String> getModuleName();
 
 }

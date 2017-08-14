@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface HaskellGtycon extends HaskellCompositeElement {
 
   @Nullable
-  HaskellQcon getQcon();
+  HaskellQName getQName();
 
 }

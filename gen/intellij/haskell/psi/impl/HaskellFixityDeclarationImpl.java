@@ -27,14 +27,8 @@ public class HaskellFixityDeclarationImpl extends HaskellCompositeElementImpl im
 
   @Override
   @NotNull
-  public HaskellFixity getFixity() {
-    return findNotNullChildByClass(HaskellFixity.class);
-  }
-
-  @Override
-  @NotNull
-  public HaskellOps getOps() {
-    return findNotNullChildByClass(HaskellOps.class);
+  public HaskellQNames getQNames() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, HaskellQNames.class));
   }
 
 }
